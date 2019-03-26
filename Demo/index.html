@@ -3,7 +3,7 @@
 <head>
 	<title>AniMath</title>
 	<link rel="icon" href='' type="image/gif" sizes="16x16">
-    <script src='js/EquationTree/UpdateTree.js'></script>
+    <script src='js/EquationTree/Tree.js'></script>
     <script src='js/EquationTree/Create.js'></script>
     <script src='js/EquationParsing/MakeTree.js'></script>
     <script src='js/EquationParsing/Transfer.js'></script>
@@ -30,14 +30,21 @@
 </head>
 <body>
 
-    <form action ="/js/EquationTree/UpdateTree.js">
-        Equation:<br> <input type="text" name = "lhs"> =
-        <input type="text" name = "rhs"><br>
-        <input type="button" onclick = " " value = "Submit">
+    Equation:<br> <input type="text" id = "lhs"> =
+    <input type="text" id = "rhs"><br>
+    <input type="button" onclick = "model = NewTree(
+        document.getElementById('lhs'), 
+        document.getElementById('rhs'))
+        alert('good')
+        " value = "Submit">
+    
+    <!--
+        <form action ="/js/EquationTree/UpdateTree.js">
     </form>
+    -->
 
-    <div class ="button">
-        <input type="button" onclick="alert('Something happened')" value = "Transfer">
+    <div class ="btn">
+        <input type="button" onclick="Transfer(model)" value = "Transfer">
         <!--
             <form action = "/js/EquationParsing/Transfer.js">
             </form>
