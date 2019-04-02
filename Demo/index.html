@@ -5,7 +5,8 @@
 	<link rel="icon" href='' type="image/gif" sizes="16x16">
     <script src='js/EquationTree/Tree.js'></script>
     <script src='js/EquationTree/Create.js'></script>
-    <script src='js/EquationParsing/MakeTree.js'></script>
+    <!--<script src='js/EquationParsing/MakeTree.js'></script>
+    -->
     <script src='js/EquationParsing/Transfer.js'></script>
     <script>
         model = null
@@ -35,8 +36,11 @@
     <input type="button" onclick = "model = NewTree(
         document.getElementById('lhs'), 
         document.getElementById('rhs'))
-        alert('good')
+        alert(model.GetEquation())
         " value = "Submit">
+    <script>
+        console.log(model)
+    </script>
     
     <!--
         <form action ="/js/EquationTree/UpdateTree.js">
@@ -51,8 +55,5 @@
         -->
     </div>
 
-<script>
-	
-</script>
 </body>
 </html>

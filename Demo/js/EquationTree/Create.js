@@ -1,10 +1,12 @@
 // Will return the model of the equation
 function NewTree(LHS, RHS) {
-    var pieces = MakeTree(LHS, RHS)
-    var tree = new Tree()
-    alert(tree)
+    tree = new Tree()
+    pieces = tree.MakeTree(LHS, RHS)
+    // pieces.forEach(function(i) {
+    //     console.log(i)
+    // })
     tree.root.value = '='
-    tree.root.left = pieces[0].root
-    tree.root.right = pieces[1].root
+    tree.root.left = this.pieces[0].root.left
+    tree.root.right = this.pieces[1].root
     return tree
 }
