@@ -1,28 +1,41 @@
 class TreeController{
-    constructor(){
-        // nothing yet, tree is made when button is clicked
+    constructor(lhs, rhs){
         require.config({
             paths: {
-                mathjs: 'js/includes/mathjs/dist/math'
+                mathjs: 'js/includes/mathjs/dist/math',
+                _make_tree: 'js/EquationTree/_make_tree'
             }
         })
-        require(["mathjs"], function(math) {
-            console.log(math.eval('sqrt(-25)'))
+        this.tree = null
+        // require(["mathjs"], function(math) {
+        //     console.log(math.eval('sqrt(-25)'))
+            
+        // })
 
+        this.tree = require(["mathjs", "_make_tree"], function(math, mt) {
+            var tree = mt.pieceTogether(lhs, rhs)
+
+            document.getElementById('LatexView').innerHTML =  "\\begin{align} " + tree[0].toTex() + " = " + tree[1].toTex() +  "\\end{align}"
+            console.log(document.getElementById('LatexView').innerHTML)
         })
         
         //const math = require('mathjs')
     }
 
     NewTree (LHS, RHS) {
-        var left = null
-        var right = null
-        require(["mathjs"], function(math, left, right) {
+        
+        require(this.tree, ["mathjs"], function(math) {
+            var left = 4
+            var right = 5
+            
+            //console.log(left)
+            //console.log(right)
             left = math.parse(LHS)
             right = math.parse(RHS)
-            console.log(left)
-            console.log(right)
+            //console.log(new math.expression.node.OperatorNode('=', 'equals', [left, right]))
+            return new math.expression.node.OperatorNode('=', 'equals', [left, right])
         })
+        setTimeout(console.log(this.tree), 8000)
         
     }
     // // Will return the model of the equation
