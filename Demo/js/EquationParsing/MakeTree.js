@@ -1,19 +1,10 @@
-// Will take the two sides of the equation 
-// and return an array of the terms and 
-// operations in the order they should be 
-// inserted (subjective)
-
-function MakeTree(LHS, RHS) {
-    var operators = ['+', '-', '*', '/']
-    var finalEquation = []
-    return [ParseSide(LHS.value), ParseSide(RHS.value)]
-    
-}
-
 function ParseSide(expression) {
     var tree = Tree()
     // split string into individual characters
     var splitEX = expression.split("")
+    parse_side(expression, splitEX, splitEX)
+}
+function parse_side(expression) {
     // n = number, x = variable, o = operation
     var currentTerm = 'n'
     var procToken = ""

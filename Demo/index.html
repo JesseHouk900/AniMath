@@ -3,13 +3,17 @@
 <head>
 	<title>AniMath</title>
 	<link rel="icon" href='' type="image/gif" sizes="16x16">
-    <script src='js/EquationTree/Tree.js'></script>
-    <script src='js/EquationTree/Create.js'></script>
-    <!--<script src='js/EquationParsing/MakeTree.js'></script>
+    <script src='js/EquationTree/TreeController.js'></script>
+    <script src='js/includes/require.js'></script>
+    
+    <!--
+        <script src='math.js' type="text/javascript"></script>
+        <script src='js/EquationTree/Tree.js'></script>
+        <script src='js/EquationParsing/MakeTree.js'></script>
     -->
     <script src='js/EquationParsing/Transfer.js'></script>
     <script>
-        model = null
+        treeController = new TreeController()
 
     </script>
 
@@ -30,16 +34,15 @@
 	</style>
 </head>
 <body>
-
-    Equation:<br> <input type="text" id = "lhs"> =
-    <input type="text" id = "rhs"><br>
-    <input type="button" onclick = "model = NewTree(
-        document.getElementById('lhs'), 
-        document.getElementById('rhs'))
-        alert(model.GetEquation())
-        " value = "Submit">
+    <!--<script>alert(math.sqrt(-25))</script>-->
+    Equation:<br> <input type="text" id = "lhs" value="2 * d"> =
+    <input type="text" id = "rhs" value="3"><br>
+    <input type="button" onclick = "treeController.NewTree(
+        document.getElementById('lhs').value, 
+        document.getElementById('rhs').value)"
+        value = "Submit">
     <script>
-        console.log(model)
+        console.log(treeController)
     </script>
     
     <!--

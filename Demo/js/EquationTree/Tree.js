@@ -7,6 +7,7 @@ class Tree {
         this.operators = ['+', '-', '*', '/']
         this.finalEquation = []
     }
+    // problem child
     extend(token, pos) {
         //console.log(token)
         if (pos == "l") {
@@ -31,7 +32,8 @@ class Tree {
         return equation
     }
     getEquation(node, e) {
-        if (node.value != null) {
+        //console.log(e)
+        if (node && node.value != null) {
             this.getEquation(node.left, e)
             e += node.value
             this.getEquation(node.right, e)
@@ -44,27 +46,30 @@ class Tree {
     // inserted (subjective)
 
     MakeTree(LHS, RHS) {
+        //console.log(LHS.value)
+        //console.log(RHS.value)
+        
         this.finalEquation = []
-        return [this.ParseSide(LHS.value), this.ParseSide(RHS.value)]
+        return [this.ParseSide(LHS), this.ParseSide(RHS)]
         
     }
 
     ParseSide(expression) {
         tree = new Tree()
         
-        console.log(expression)
+        //console.log(expression)
         // split string into individual characters
         var splitEX = expression.split("")
         // n = number, x = variable, o = operation
         var currentTerm = 'n'
         var procToken = ""
         for(var i = 0; i < splitEX.length; i++) {
-            console.log(splitEX[i])
-            setTimeout(console.log(tree), 5000)
+            //console.log(splitEX[i])
+            //setTimeout(console.log(tree), 5000)
             //console.log(splitEX[i])
             // if there is a number to process 
             if (!isNaN(splitEX[i])) {
-                console.log("Not not a Number (a number)")
+                //console.log("Not not a Number (a number)")
                 // if the previous token processed was not a number...
                 if (currentTerm != 'n') {
                     if (this.isLeft) {
@@ -84,7 +89,7 @@ class Tree {
             else {
                 // if token is an operation
                 if (this.operators.includes(splitEX[i])) {
-                    console.log("is operation")
+                    //console.log("is operation")
                     if (currentTerm != 'o') {   
                         if (this.isLeft) {
                             // make a new value
@@ -100,9 +105,15 @@ class Tree {
                 }
                 // the token is a variable
                 else {
-                    console.log("is variable")
+                    //console.log("is variable")
                     if (currentTerm != 'x') {
-                        tree.extend(procToken)
+                        if (this.isLeft) {
+                            // make a new value
+                            tree.extend(procToken, "l")
+                        }
+                        else {
+                            tree.extend(procToken, "r")
+                        }
                         procToken = ""
                         currentTerm = 'x'
                     }
