@@ -17,7 +17,7 @@
 
     </script>
 
-	<style type="text/css">
+    <style type="text/css">
 		*{
 			margin: 0;
 			padding: 0;
@@ -31,10 +31,19 @@
 			margin: 0;
 			padding: 0;
 		}
+        div {
+    width: 200px;
+    border: 2px solid green;
+    padding: 50px;
+    margin: 20px;
+}
 	</style>
 </head>
-<body>
+<body>  
     <!--<script>alert(math.sqrt(-25))</script>-->
+    <div>
+        
+    </div>
     Equation:<br> <input type="text" id = "lhs" value="2 * d"> =
     <input type="text" id = "rhs" value="3"><br>
     <input type="button" onclick = "treeController.NewTree(
@@ -49,14 +58,10 @@
         <form action ="/js/EquationTree/UpdateTree.js">
     </form>
     -->
-
-    <div class ="btn">
         <input type="button" onclick="Transfer(model)" value = "Transfer">
         <!--
             <form action = "/js/EquationParsing/Transfer.js">
             </form>
         -->
-    </div>
-
 </body>
 </html>
