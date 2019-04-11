@@ -9,6 +9,7 @@
     <script src='js/LaTeXController/LaTeXController.js'></script>
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
+            showProcessingMessages: false,
             extensions: ["tex2jax.js"],
             jax: ["input/TeX", "output/HTML-CSS"],
             tex2jax: {inlineMath: [["$", "$"], ["\\(","\\)"]]
@@ -23,7 +24,41 @@
         <script src='js/EquationParsing/MakeTree.js'></script>
     -->
     <script src='js/EquationParsing/Transfer.js'></script>
+    <script>
+    var Preview = {
+        delay:150,
+        typeset: null,
+        preview: null,
+        buffer: null,
+        oldText: '',
+        pending: false,
+        
+        Init: function() {
+            this.typeset = document.getElementById("LatexView")
+            this.buffer = document.createElement("div")
+            this.review = document.createElement("div")
+        },
 
+        Update: function() {
+            var text = document.getElementById("lhs").value + '=' + document.getElementById("rhs").value
+            if (text !== this.oldText) {
+                this.oldText = text
+                if (!this.pending) {
+                    this.pending = true;
+                    MathJax.Hub.Queue(["Restart", this])
+                }
+            }
+        },
+        
+        Restart: function() {
+            var text = "<p> \\begin{align} " + this.oldText + " \\end{align} <\p>"
+            this.buffer.innerHTML = this.typeset.innerHTML = text
+            this.pending = false
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub,this.typeset ])                
+        }
+        
+    }
+    </script>
     <style type="text/css">
 		*{
 			margin: 0;
@@ -50,25 +85,26 @@
     <!--<script>alert(math.sqrt(-25))</script>-->
     <script>
     
-    (function() {
-        var QUEUE = MathJax.Hub.queue
-        var math = null, box = null
+    // (function() {
+    //     var QUEUE = MathJax.Hub.queue
+    //     var math = null, box = null
 
-        QUEUE.Push(function() {
-            math = MathJax.Hub.getAllJax("LatexView")[0]
-            box = document.getElementById("LatexView")
+    //     QUEUE.Push(function() {
+    //         math = MathJax.Hub.getAllJax("LatexView")[0]
+    //         box = document.getElementById("LatexView")
 
-        })
+    //     })
 
-        window.UpdateMath = function(TeX) {
-            console.log(TeX)
-            QUEUE.Push(
-                ["resetEquationNumbers", MathJax.InputJax.TeX],
-                ["Text", math, "\\displaystyle{"+TeX+"}"]
-            )
-        }
-
-    })()
+    //     window.UpdateMath = function(TeX) {
+    //         console.log(TeX)
+    //         QUEUE.Push(
+    //             ["resetEquationNumbers", MathJax.InputJax.TeX],
+    //             ["Text", math, "\\displaystyle{"+TeX+"}"]
+    //         )
+    //     }
+        
+    // })()
+    treeController = new TreeController()
     </script>
     <p>
         \\(a^2 + b^2 = c^2\\)<br>
@@ -77,17 +113,16 @@
     <p id ="LatexView" class="output">
         $${}$$
     </p>
-    Equation:<br> <input type="text" id = "lhs" value="2 * d" onchange="UpdateMath(this.value)"> =<!---->
-    <input type="text" id = "rhs" value="3" onchange="UpdateMath(this.value)"><br><!---->
+    Equation:<br> <input type="text" id = "lhs" value="2 * d" onchange="Preview.Update()"> =<!---->
+    <input type="text" id = "rhs" value="3" onchange="Preview.Update()"><br><!---->
     <script>
         left = document.getElementById('lhs').value
         right = document.getElementById('rhs').value
-        treeController = new TreeController()
         treeController.NewTree(left, 
         right)
         console.log(treeController)
         LatexController.UpdateView()
-        window.UpdateMath(left + '=' + right)
+        //this.blur(); this.focus()
         // Was in wrong place before
 
     </script>
@@ -98,27 +133,28 @@
         // document.getElementById('LatexView').value = treeController.Tree.toTex()
         "
         value = "Submit">
-    <script>
-        if (MathJax.Hub.Browser.isMSIE || MathJax.Hub.Browser.isChrome || MathJax.Hub.Browser.isFirefox || MathJax.Hub.Browser.isSafari || MathJax.Hub.Browser.isOpera) {
-            lhs.onkeypress = function () {
-                if (window.event && window.event.keyCode === 13) {
-                    console.log("success")
-                    LatexController.UpdateView()
-                    this.blur()
-                    this.focus()
-                }
-            }
-            rhs.onkeypress = function () {
-                if (window.event && window.event.keyCode === 13) {
-                    console.log("failure")
-                    LatexController.UpdateView()
-                    this.blur()
-                    this.focus()
-                }
-            }
-        }
-    </script>
     <input type="button" onclick="Transfer(model)" value = "Transfer">
+    <script>
+        Preview.Init()
+    // if (MathJax.Hub.Browser.isMSIE || MathJax.Hub.Browser.isChrome || MathJax.Hub.Browser.isFirefox || MathJax.Hub.Browser.isSafari || MathJax.Hub.Browser.isOpera) {
+        //     lhs.onkeypress = function () {
+        //         if (window.event && window.event.keyCode === 13) {
+        //             LatexController.UpdateView()
+        //             console.log(treeController)
+        //             this.blur()
+        //             this.focus()
+        //         }
+        //     }
+        //     rhs.onkeypress = function () {
+        //         if (window.event && window.event.keyCode === 13) {
+        //             console.log("failure")
+        //             LatexController.UpdateView()
+        //             this.blur()
+        //             this.focus()
+        //         }
+        //     }
+        // }
+    </script>
         
 </body>
 </html>
