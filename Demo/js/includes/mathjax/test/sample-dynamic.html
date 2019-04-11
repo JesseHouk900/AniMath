@@ -53,6 +53,7 @@ input {margin-top: .7em}
     //  so we don't see a flash as the math is cleared and replaced.
     //
     window.UpdateMath = function (TeX) {
+      console.log(TeX)
       QUEUE.Push(
           HIDEBOX,
           ["resetEquationNumbers",MathJax.InputJax.TeX],

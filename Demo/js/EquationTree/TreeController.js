@@ -21,9 +21,9 @@ class TreeController{
             left = math.parse(LHS)
             right = math.parse(RHS)
             //console.log(new math.expression.node.OperatorNode('=', 'equals', [left, right]))
-            return new math.expression.node.OperatorNode('=', 'equals', [left, right])
+            window.treeController.tree = new math.expression.node.OperatorNode('=', 'equals', [left, right])
         })
-        setTimeout(console.log(this.tree), 8000)
+        //setTimeout(console.log(this.tree), 8000)
         
     }
     // // Will return the model of the equation
