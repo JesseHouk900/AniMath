@@ -1,5 +1,5 @@
 class TreeController{
-    constructor(lhs, rhs){
+    constructor(){
         require.config({
             paths: {
                 mathjs: 'js/includes/mathjs/dist/math',

@@ -78,9 +78,16 @@
     Equation:<br> <input type="text" id = "lhs" value="2 * d"> =<!--onchange="UpdateMath(this.value)"-->
     <input type="text" id = "rhs" value="3" ><br><!--onchange="UpdateMath(this.value)"-->
     <script>
-        treeController = new TreeController(document.getElementById('lhs').value, 
-        document.getElementById('rhs').value)
-        LatexController.UpdateView()
+        left = document.getElementById('lhs').value
+        right = document.getElementById('rhs').value
+        treeController = new TreeController()
+        treeController.NewTree(left, 
+        right)
+        console.log(treeController)
+        // ********************************************
+        // With this the box does not appear, but the LaTeX code does
+        // **********************************************
+        //LatexController.UpdateView()
 
     </script>
     <input type="button" onclick = "treeController.NewTree(
