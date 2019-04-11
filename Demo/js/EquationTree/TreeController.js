@@ -7,19 +7,7 @@ class TreeController{
             }
         })
         this.tree = null
-        // require(["mathjs"], function(math) {
-        //     console.log(math.eval('sqrt(-25)'))
-            
-        // })
 
-        this.tree = require(["mathjs", "_make_tree"], function(math, mt) {
-            var tree = mt.pieceTogether(lhs, rhs)
-
-            document.getElementById('LatexView').innerHTML =  "$${\\begin{align} " + tree[0].toTex() + " = " + tree[1].toTex() +  "\\end{align}}$$"
-            console.log(document.getElementById('LatexView').innerHTML)
-        })
-        
-        //const math = require('mathjs')
     }
 
     NewTree (LHS, RHS) {

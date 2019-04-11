@@ -67,7 +67,6 @@
         }
 
     })()
-    LatexController = new LatexController()
     </script>
     <p>
         \\(a^2 + b^2 = c^2\\)<br>
@@ -81,6 +80,7 @@
     <script>
         treeController = new TreeController(document.getElementById('lhs').value, 
         document.getElementById('rhs').value)
+        LatexController.UpdateView()
 
     </script>
     <input type="button" onclick = "treeController.NewTree(
