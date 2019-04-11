@@ -82,28 +82,7 @@
 	</style>
 </head>
 <body>  
-    <!--<script>alert(math.sqrt(-25))</script>-->
     <script>
-    
-    // (function() {
-    //     var QUEUE = MathJax.Hub.queue
-    //     var math = null, box = null
-
-    //     QUEUE.Push(function() {
-    //         math = MathJax.Hub.getAllJax("LatexView")[0]
-    //         box = document.getElementById("LatexView")
-
-    //     })
-
-    //     window.UpdateMath = function(TeX) {
-    //         console.log(TeX)
-    //         QUEUE.Push(
-    //             ["resetEquationNumbers", MathJax.InputJax.TeX],
-    //             ["Text", math, "\\displaystyle{"+TeX+"}"]
-    //         )
-    //     }
-        
-    // })()
     treeController = new TreeController()
     </script>
     <p>
@@ -122,38 +101,20 @@
         right)
         console.log(treeController)
         LatexController.UpdateView()
-        //this.blur(); this.focus()
-        // Was in wrong place before
 
     </script>
     <input type="button" onclick = "treeController.NewTree(
         document.getElementById('lhs').value, 
         document.getElementById('rhs').value)
-        LatexController.UpdateView()
-        // document.getElementById('LatexView').value = treeController.Tree.toTex()
-        "
+        LatexController.UpdateView()"
         value = "Submit">
-    <input type="button" onclick="Transfer(model)" value = "Transfer">
+    <br><input type="button" onclick="Transfer(treeController.tree)" value = "Transfer">
+    <p id="OperatorOutput">
+
+    </p>
     <script>
         Preview.Init()
-    // if (MathJax.Hub.Browser.isMSIE || MathJax.Hub.Browser.isChrome || MathJax.Hub.Browser.isFirefox || MathJax.Hub.Browser.isSafari || MathJax.Hub.Browser.isOpera) {
-        //     lhs.onkeypress = function () {
-        //         if (window.event && window.event.keyCode === 13) {
-        //             LatexController.UpdateView()
-        //             console.log(treeController)
-        //             this.blur()
-        //             this.focus()
-        //         }
-        //     }
-        //     rhs.onkeypress = function () {
-        //         if (window.event && window.event.keyCode === 13) {
-        //             console.log("failure")
-        //             LatexController.UpdateView()
-        //             this.blur()
-        //             this.focus()
-        //         }
-        //     }
-        // }
+
     </script>
         
 </body>
