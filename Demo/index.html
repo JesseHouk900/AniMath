@@ -83,11 +83,9 @@
         treeController = new TreeController()
         treeController.NewTree(left, 
         right)
+        LatexController.UpdateView()
+        // Was in wrong place before
         console.log(treeController)
-        // ********************************************
-        // With this the box does not appear, but the LaTeX code does
-        // **********************************************
-        //LatexController.UpdateView()
 
     </script>
     <input type="button" onclick = "treeController.NewTree(
