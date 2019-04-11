@@ -5,15 +5,16 @@
 	<link rel="icon" href='' type="image/gif" sizes="16x16">
     <script src='js/EquationTree/TreeController.js'></script>
     <script src='js/includes/require.js'></script>
+    <script src='js/LaTeXController/LaTeXController.js'></script>
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
             extensions: ["tex2jax.js"],
             jax: ["input/TeX", "output/HTML-CSS"],
-            tex2jax: {inlineMath: [["$", "$"], ["\\(","\\("]]
+            tex2jax: {inlineMath: [["$", "$"], ["\\(","\\)"]]
         }
     });
 </script>
-<script src='js/includes/mathjax/MathJax.js' type="text/javascript"></script>
+<script src='js/includes/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML' type="text/javascript"></script>
 <!--
     <script src='js/EquationTree/_make_tree.js'></script>
         <script src='math.js' type="text/javascript"></script>
@@ -49,26 +50,34 @@
     <script>
     
     (function() {
-        var QUEUE = MathJax.hub.QUEUE
-        var MATH = null, box = null
+        var QUEUE = MathJax.Hub.queue
+        var math = null, box = null
 
         QUEUE.Push(function() {
-            MATH = MathJax.Hub.getAllJax("LatexView")[0]
+            math = MathJax.Hub.getAllJax("LatexView")[0]
             box = document.getElementById("LatexView")
 
         })
 
         window.UpdateMath = function(TeX) {
-            QUEUE.Push(["resetEquationNumbers", MathJax.InputJax.TeX],
-            ["Text", MATH, "\\displaystyle{"+TeX+"}"])
+            QUEUE.Push(
+                ["resetEquationNumbers", MathJax.InputJax.TeX],
+                ["Text", math, "\\displaystyle{"+TeX+"}"]
+            )
         }
 
-    })
+    })()
+    LatexController = new LatexController()
     </script>
-    <p id ="LatexView">
+    <p>
+        \\(a^2 + b^2 = c^2\\)<br>
+        $${ a^2 + b^2 = c^2}$$
     </p>
-    Equation:<br> <input type="text" id = "lhs" value="2 * d"> =
-    <input type="text" id = "rhs" value="3"><br>
+    <p id ="LatexView" class="output">
+        $${}$$
+    </p>
+    Equation:<br> <input type="text" id = "lhs" value="2 * d"> =<!--onchange="UpdateMath(this.value)"-->
+    <input type="text" id = "rhs" value="3" ><br><!--onchange="UpdateMath(this.value)"-->
     <script>
         treeController = new TreeController(document.getElementById('lhs').value, 
         document.getElementById('rhs').value)
@@ -77,30 +86,31 @@
     <input type="button" onclick = "treeController.NewTree(
         document.getElementById('lhs').value, 
         document.getElementById('rhs').value)
-        
-        document.getElementById('LatexView').value = treeController.Tree.toTex()
+        LatexController.UpdateView()
+        // document.getElementById('LatexView').value = treeController.Tree.toTex()
         "
         value = "Submit">
     <script>
-        if (MathJax.Hub.Browser.isMSIE) {
-            MathInput.onkeypress = function () {
+        if (MathJax.Hub.Browser.isMSIE || MathJax.Hub.Browser.isChrome || MathJax.Hub.Browser.isFirefox || MathJax.Hub.Browser.isSafari || MathJax.Hub.Browser.isOpera) {
+            lhs.onkeypress = function () {
                 if (window.event && window.event.keyCode === 13) {
+                    console.log("success")
+                    LatexController.UpdateView()
+                    this.blur()
+                    this.focus()
+                }
+            }
+            rhs.onkeypress = function () {
+                if (window.event && window.event.keyCode === 13) {
+                    console.log("failure")
+                    LatexController.UpdateView()
                     this.blur()
                     this.focus()
                 }
             }
         }
     </script>
-
-    
-    <!--
-        <form action ="/js/EquationTree/UpdateTree.js">
-    </form>
-    -->
-        <input type="button" onclick="Transfer(model)" value = "Transfer">
-        <!--
-            <form action = "/js/EquationParsing/Transfer.js">
-            </form>
-        -->
+    <input type="button" onclick="Transfer(model)" value = "Transfer">
+        
 </body>
 </html>

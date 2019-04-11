@@ -15,7 +15,7 @@ class TreeController{
         this.tree = require(["mathjs", "_make_tree"], function(math, mt) {
             var tree = mt.pieceTogether(lhs, rhs)
 
-            document.getElementById('LatexView').innerHTML =  "\\begin{align} " + tree[0].toTex() + " = " + tree[1].toTex() +  "\\end{align}"
+            document.getElementById('LatexView').innerHTML =  "$${\\begin{align} " + tree[0].toTex() + " = " + tree[1].toTex() +  "\\end{align}}$$"
             console.log(document.getElementById('LatexView').innerHTML)
         })
         
