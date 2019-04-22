@@ -1,3 +1,4 @@
+// NOT IN USE SINCE MATHJS
 class Tree {
     // written in a cheating way, only works with equations of at
     // most (a * b) + c = (e * f) + d
@@ -26,7 +27,7 @@ class Tree {
     }
 
     GetEquation() {
-        var equation = ""
+        var equation = {Name: ""}
         //console.log(this.root)
         this.getEquation(this.root, equation)
         return equation
@@ -35,7 +36,7 @@ class Tree {
         //console.log(e)
         if (node && node.value != null) {
             this.getEquation(node.left, e)
-            e += node.value
+            e.Name += node.value
             this.getEquation(node.right, e)
         }
     }

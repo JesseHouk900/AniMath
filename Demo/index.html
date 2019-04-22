@@ -5,8 +5,9 @@
     
     <link rel="icon" href='' type="image/gif" sizes="16x16">
     <script src='js/EquationTree/TreeController.js'></script>
-    <script src='js/includes/require.js'></script>
-    <script src='js/LaTeXController/LaTeXController.js'></script>
+   <script data-main="js/main.js" src="js/includes/require.js"></script>
+   <script src='js/LaTeXController/LaTeXController.js'></script>
+   <script src='js/EquationParsing/Transfer.js'></script>
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
             showProcessingMessages: false,
@@ -23,7 +24,6 @@
         <script src='js/EquationTree/Tree.js'></script>
         <script src='js/EquationParsing/MakeTree.js'></script>
     -->
-    <script src='js/EquationParsing/Transfer.js'></script>
     <script>
     var Preview = {
         delay:150,
@@ -83,7 +83,7 @@
 </head>
 <body>  
     <script>
-    treeController = new TreeController()
+    this.treeController = new TreeController()
     </script>
     <p>
         \\(a^2 + b^2 = c^2\\)<br>
@@ -97,9 +97,9 @@
     <script>
         left = document.getElementById('lhs').value
         right = document.getElementById('rhs').value
-        treeController.NewTree(left, 
+        this.treeController.NewTree(left, 
         right)
-        console.log(treeController)
+        console.log(this.treeController)
         LatexController.UpdateView()
 
     </script>

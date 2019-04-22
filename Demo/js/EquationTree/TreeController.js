@@ -1,9 +1,9 @@
 class TreeController{
     constructor(){
-        require.config({
+        requirejs.config({
             paths: {
-                mathjs: 'js/includes/mathjs/dist/math',
-                _make_tree: 'js/EquationTree/_make_tree'
+                mathjs: 'includes/mathjs/dist/math',
+                _make_tree: 'EquationTree/_make_tree'
             }
         })
         this.tree = null
@@ -12,7 +12,7 @@ class TreeController{
 
     NewTree (LHS, RHS) {
         
-        require(this.tree, ["mathjs"], function(math) {
+        require( ["mathjs"], function(math) {
             var left = 4
             var right = 5
             
