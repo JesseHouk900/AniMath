@@ -111,12 +111,12 @@ class keyboard {
     color: #738dc3;
   }
   
-  @font-face {
-    font-family: "Mathway";
-    src: url("/fonts/Mathway.otf?v=ee12d0bed3efae21bdf27f1b2ab30feca7d73c59") format("opentype");
-    font-weight: normal;
-    font-style: normal;
-  }
+  // @font-face {
+  //   font-family: 'Mathway';
+  //   src: url('../fonts/Mathway.otf?v=7f9ebeda475679dbf64a54f43dfb5aa33c94338c') format("embedded-opentype");
+  //   font-weight: normal;
+  //   font-style: normal;
+  // }
   
   
   .mw {
@@ -1643,30 +1643,48 @@ class keyboard {
     }
   }
   
-  .header {
-    width: 100%;
-    height: 165px;
-    display: table;
-    background-color: #767674;
-    background-position: center center;
-    background-repeat: no-repeat;
-    margin-bottom: 30px;
-    h1 {
-      height: 165px;
-      width: 100%;
-      margin: 0;
-      padding: 0 20px;
-      text-align: center;
-      vertical-align: middle;
-      display: table-cell;
-      color: #fff;
-      text-shadow: 0 0 12px #444;
-      font-size: 36px;
-      line-height: 48px;
-      font-weight: bold;
-      text-transform: uppercase;
-    }
+  .block {
+    padding: 1em;
+    white-space: nowrap;
   }
+  
+  #render {
+    width: 32em;
+    background-color: #fff;
+    height: 6em;
+    text-align: center;
+  }
+  
+  .render {
+    position: absolute;
+    width: auto;
+    color: transparent;
+  }
+  
+  // .header {
+  //   width: 100%;
+  //   height: 165px;
+  //   display: table;
+  //   background-color: #767674;
+  //   background-position: center center;
+  //   background-repeat: no-repeat;
+  //   margin-bottom: 30px;
+  //   h1 {
+  //     height: 165px;
+  //     width: 100%;
+  //     margin: 0;
+  //     padding: 0 20px;
+  //     text-align: center;
+  //     vertical-align: middle;
+  //     display: table-cell;
+  //     color: #fff;
+  //     text-shadow: 0 0 12px #444;
+  //     font-size: 36px;
+  //     line-height: 48px;
+  //     font-weight: bold;
+  //     text-transform: uppercase;
+  //   }
+  // }
   
   .header-about, .header-affiliate, .header-careers, .header-mobile, .header-press, .header-privacy, .header-terms {
     background-image:url(/images/about.jpg);

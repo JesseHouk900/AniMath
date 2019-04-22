@@ -16,6 +16,27 @@
   <!-- add to homescreen for ios -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+  <script src='assets/js/EquationParsing/Transfer.js'></script>
+  <script src='assets/js/LaTeXController/LaTexController.js'></script>
+  <script src='assets/js/EquationTree/TreeController.js'></script>
+  <script src='assets/js/EquationTree/_make_tree.js'></script>
+  <script type='text/x-mathjax-config'>
+    MathJax.Hub.Config({
+      showProcessingMessages: false,
+      extensions: ["tex2jax.js"],
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {inlineMath: [["$", "$"], ["\\(","\\)"]]},
+      'TeX': { extensions: ['color.js', 'cancel.js']},
+    });
+  </script>
+  <script src='assets/js/includes/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script type="text/javascript" src="assets/js/jquery.textchange.min.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="assets/js/lib_miyu.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="assets/js/AniMath.js" charset="UTF-8"></script>
+
 </head>
 
 <body>

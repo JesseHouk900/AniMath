@@ -7,12 +7,15 @@
 </ion-header>
 
 <ion-content>
+  <div class="block">
+    <div id="render"></div>
+  </div>
+
   <ion-item>
-    <ion-input id="LHS" value="" (click)="selectedSide('LHS')" [(ngModel)]="lValue"></ion-input> = <ion-input id="RHS"
-      value="" (click)="selectedSide('RHS')" [(ngModel)]="rValue"></ion-input>
+    <ion-input id="inp" value="" [(ngModel)]="Value"></ion-input>
   </ion-item>
 
-  <ion-button (click)="SubmitClicked()" fill="outline">
+  <ion-button id="parse" fill="outline">
     Submit
   </ion-button>
 
@@ -40,12 +43,19 @@
               data-char=")" data-popup="1">)</div>
           </div>
           <div class="kbKeyContainer kbSpan1" style="width: 37px;">
+            <div class="kbAlt kbSingle default" id="key-forward_slash">
+              <div class="kbAltKey kbAltSingle" data-id="forward_slash" data-keycode="47" data-char="/">/</div>
+            </div>
+            <div (click)="setInput(('/'), theSide)" class="kbKey default" data-id="forward_slash" data-keycode="47"
+              data-char="/" data-popup="1">/</div>
+          </div>
+          <!-- <div class="kbKeyContainer kbSpan1" style="width: 37px;">
             <div class="kbAlt kbSingle default" id="key-bar">
               <div class="kbAltKey kbAltSingle" data-id="bar" data-keycode="124" data-char="|">|</div>
             </div>
             <div (click)="setInput(('|'), theSide)" class="kbKey default" data-id="bar" data-keycode="124" data-char="|"
               data-popup="1">|</div>
-          </div>
+          </div> -->
           <div class="kbKeyContainer kbSpan1" style="width: 37px;">
             <div class="kbAlt kbSingle default" id="key-sqrt">
               <div class="kbAltKey kbAltSingle" data-id="sqrt" data-keycode="-1" data-char="√">√</div>
@@ -53,9 +63,12 @@
             <div (click)="setInput(('√'), theSide)" class="kbKey default" data-id="sqrt" data-keycode="-1" data-char="√"
               data-popup="1">√</div>
           </div>
-          <div class="kbKeyContainer kbSpan1 kbLast" style="width: 37px;">
-            <div (click)="setInput(('/b'), theSide)" class="kbKey dark" data-id="backspace" data-keycode="8"
-              data-char="" data-popup="0">&#9224;</div>
+          <div class="kbKeyContainer kbSpan1" style="width: 37px;">
+            <div class="kbAlt kbSingle default" id="key-caret">
+              <div class="kbAltKey kbAltSingle" data-id="caret" data-keycode="94" data-char="^">^</div>
+            </div>
+            <div (click)="setInput(('^'), theSide)" class="kbKey default" data-id="caret" data-keycode="94"
+              data-char="^" data-popup="1">^</div>
           </div>
         </div>
         <div class="kbRow">
@@ -125,13 +138,6 @@
               data-popup="1">6</div>
           </div>
           <div class="kbKeyContainer kbSpan1" style="width: 37px;">
-            <div class="kbAlt kbSingle default" id="key-forward_slash">
-              <div class="kbAltKey kbAltSingle" data-id="forward_slash" data-keycode="47" data-char="/">/</div>
-            </div>
-            <div (click)="setInput(('/'), theSide)" class="kbKey default" data-id="forward_slash" data-keycode="47"
-              data-char="/" data-popup="1">/</div>
-          </div>
-          <div class="kbKeyContainer kbSpan1" style="width: 37px;">
             <div class="kbAlt kbSingle default" id="key-asterisk">
               <div class="kbAltKey kbAltSingle" data-id="asterisk" data-keycode="42" data-char="*">*</div>
             </div>
@@ -175,24 +181,11 @@
             <div (click)="setInput(('-'), theSide)" class="kbKey default" data-id="minus" data-keycode="45"
               data-char="-" data-popup="1">-</div>
           </div>
-          <div class="kbKeyContainer kbSpan1" style="width: 37px;">
-            <div class="kbAlt kbSingle default" id="key-caret">
-              <div class="kbAltKey kbAltSingle" data-id="caret" data-keycode="94" data-char=".">.</div>
-            </div>
-            <div (click)="setInput(('^'), theSide)" class="kbKey default" data-id="period" data-keycode="94"
-              data-char="." data-popup="1">^</div>
-          </div>
         </div>
         <div class="kbRow">
-          <div class="kbKeyContainer kbSpan1 kbFirst" style="width: 37px;">
-            <div class="kbKey dark" data-id="abc" data-keycode="-1" data-char="" data-popup="0">abc</div>
-          </div>
-          <div class="kbKeyContainer kbSpan1" style="width: 37px;">
-            <div class="kbAlt kbSingle default" id="key-zero">
-              <div class="kbAltKey kbAltSingle" data-id="zero" data-keycode="48" data-char="0">0</div>
-            </div>
-            <div (click)="setInput(('0'), theSide)" class="kbKey default" data-id="zero" data-keycode="48" data-char="0"
-              data-popup="1">0</div>
+          <div class="kbKeyContainer kbSpan1 kbLast" style="width: 37px;">
+            <div (click)="setInput(('/b'), theSide)" class="kbKey dark" data-id="backspace" data-keycode="8"
+              data-char="" data-popup="0">&#9224;</div>
           </div>
           <div class="kbKeyContainer kbSpan1" style="width: 37px;">
             <div class="kbAlt kbSingle default" id="key-period">
@@ -202,11 +195,11 @@
               data-char="." data-popup="1">.</div>
           </div>
           <div class="kbKeyContainer kbSpan1" style="width: 37px;">
-            <div class="kbAlt kbSingle default" id="key-plus">
-              <div class="kbAltKey kbAltLeft" data-id="plus" data-keycode="43" data-char="+">+</div>
+            <div class="kbAlt kbSingle default" id="key-zero">
+              <div class="kbAltKey kbAltSingle" data-id="zero" data-keycode="48" data-char="0">0</div>
             </div>
-            <div (click)="setInput(('+'), theSide)" class="kbKey default" data-id="plus" data-keycode="43" data-char="+"
-              data-popup="1">+</div>
+            <div (click)="setInput(('0'), theSide)" class="kbKey default" data-id="zero" data-keycode="48" data-char="0"
+              data-popup="1">0</div>
           </div>
           <div class="kbKeyContainer kbSpan1" style="width: 37px;">
             <div class="kbAlt kbSingle default" id="key-equals">
@@ -214,6 +207,13 @@
             </div>
             <div (click)="setInput(('='), theSide)" class="kbKey default" data-id="equals" data-keycode="61"
               data-char="=" data-popup="1">=</div>
+          </div>
+          <div class="kbKeyContainer kbSpan1" style="width: 37px;">
+            <div class="kbAlt kbSingle default" id="key-plus">
+              <div class="kbAltKey kbAltLeft" data-id="plus" data-keycode="43" data-char="+">+</div>
+            </div>
+            <div (click)="setInput(('+'), theSide)" class="kbKey default" data-id="plus" data-keycode="43" data-char="+"
+              data-popup="1">+</div>
           </div>
         </div>
       </div>
