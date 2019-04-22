@@ -7,12 +7,15 @@
 </ion-header>
 
 <ion-content>
+  <div class="block">
+    <div id="render"></div>
+  </div>
+
   <ion-item>
-    <ion-input id="LHS" value="" (click)="selectedSide('LHS')" [(ngModel)]="lValue"></ion-input> = <ion-input id="RHS"
-      value="" (click)="selectedSide('RHS')" [(ngModel)]="rValue"></ion-input>
+    <ion-input id="inp" value="" [(ngModel)]="Value"></ion-input>
   </ion-item>
 
-  <ion-button (click)="SubmitClicked()" fill="outline">
+  <ion-button id="parse" fill="outline">
     Submit
   </ion-button>
 
@@ -184,9 +187,6 @@
           </div>
         </div>
         <div class="kbRow">
-          <div class="kbKeyContainer kbSpan1 kbFirst" style="width: 37px;">
-            <div class="kbKey dark" data-id="abc" data-keycode="-1" data-char="" data-popup="0">abc</div>
-          </div>
           <div class="kbKeyContainer kbSpan1" style="width: 37px;">
             <div class="kbAlt kbSingle default" id="key-zero">
               <div class="kbAltKey kbAltSingle" data-id="zero" data-keycode="48" data-char="0">0</div>
