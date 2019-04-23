@@ -23,7 +23,7 @@ $(function () {
     var render_left, render_top, render_x, render_y, letter_space = 4;
     var speed = 1000;
 
-    initialize();
+    // initialize();
 
     function initialize() {
 

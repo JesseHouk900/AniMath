@@ -3,7 +3,7 @@ class TreeController{
         require.config({
             paths: {
                 mathjs: 'js/includes/mathjs/dist/math',
-                _make_tree: 'js/EquationTree/_make_tree'
+                // _make_tree: 'js/EquationTree/_make_tree'
             }
         })
         this.tree = null

@@ -1,9 +1,9 @@
-define (['mathjs'], function(math) {
-    return { pieceTogether: function(lhs, rhs)
-        { 
+define(['mathjs'], function (math) {
+    return {
+        pieceTogether: function (lhs, rhs) {
             //console.log(lhs)
             //console.log(rhs)
-            return [ math.parse(lhs), math.parse(rhs)]
+            return [math.parse(lhs), math.parse(rhs)]
         }
     }
-})
+});
