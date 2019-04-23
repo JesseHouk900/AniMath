@@ -20,10 +20,14 @@ $(function () {
     };
     var text_c, text_2ax, text_b, text_rb2m4ac, text_4a, text_b2;
 
-    var render_left, render_top, render_x, render_y, letter_space = 4;
+    var render_left = 4;
+    var render_top = 4;
+    var render_x = 4;
+    var render_y = 4;
+    var letter_space = 4;
     var speed = 1000;
 
-    // initialize();
+    initialize();
 
     function initialize() {
 
@@ -37,6 +41,7 @@ $(function () {
                 switch (e.keyCode) {
                     case 13:
                         if ($('#parse').prop('disabled') === false) parse();
+                        console.log('Solve Pushed');
                         break;
                 }
             }
@@ -63,9 +68,10 @@ $(function () {
         phase = 0;
         $('#speed').trigger('change');
 
-        var offset = $('#render').offset();
-        render_x = render_left = offset.left + 16;
-        render_y = render_top = offset.top + 60;
+        render_x = $('#render').offsetLeft + 16;
+        render_left = $('#render').offsetLeft + 16;
+        render_y = $('#render').offsetTop + 60;
+        render_top = $('#render').offsetTop + 60;
         $('#render').empty();
     }
 
